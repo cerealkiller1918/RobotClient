@@ -16,7 +16,6 @@ public class Master {
     public void run(){
         try {
             image = null;
-            bytes = new byte[16384];
             socket = new Socket("192.168.1.12", 444);
             inputStream = new DataInputStream(socket.getInputStream());
             outputStream = new OutputStreamWriter(socket.getOutputStream());
