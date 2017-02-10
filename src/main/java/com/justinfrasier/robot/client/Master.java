@@ -29,12 +29,10 @@ public class Master {
 
     void closeDownConnection() {
         try {
-            if (socket.isConnected()) {
-                inputStream.close();
-                outputStream.close();
-                socket.close();
-            }
-        }catch (IOException e){}
+            if (socket.isConnected()) socket.close();
+            if(inputStream != null)inputStream.close();
+            if(outputStream != null)outputStream.close();
+        }catch (IOException | NullPointerException e){}
     }
 
     private void setupSocketAndStreams() throws IOException {
