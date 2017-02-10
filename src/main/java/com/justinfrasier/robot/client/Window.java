@@ -3,20 +3,26 @@ package com.justinfrasier.robot.client;
 
 import javax.swing.*;
 
-public class Window extends JFrame{
-
+public class Window {
+    JFrame frame;
+    JPanel panel;
     public Window(Master master) throws Exception{
-        //Thread.sleep(500);
-        this.setTitle("Client");
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setSize(650,515);
-        this.setVisible(true);
-        JPanel panel = new VideoPanel(master);
+        frame = new JFrame();
+        frame.setTitle("Client");
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setSize(650,515);
+        frame.setVisible(true);
+        panel = new VideoPanel(master);
         panel.repaint();
-        this.add(panel);
-        while(true){
-            panel.repaint();
-            //Thread.sleep(700);
-        }
+        frame.add(panel);
+        Runnable runnable = new Runnable() {
+            public void run() {
+                while(true){
+                    panel.repaint();
+                }
+            }
+        };
+        Thread thread = new Thread(runnable);
+        thread.start();
     }
 }
