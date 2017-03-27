@@ -19,7 +19,7 @@ public class VideoPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g){
         updateImage();
-        //if(image==null) System.out.println("Image in panel is NULL");
+        if(image==null) return;
         super.paintComponent(g);
         g.drawImage(image,0,0,null);
     }

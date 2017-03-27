@@ -12,47 +12,77 @@ public class Master {
     private OutputStreamWriter outputStream;
     private byte[] bytes;
     private ImageConverter converter = new ImageConverter();
+    private Window window;
 
-    public void run(){
+    public void runMain(){
         try {
             image = null;
             setupSocketAndStreams();
             Runnable runnable = () -> imageUpdateLoop();
             Thread thread = new Thread(runnable);
             thread.start();
-            new Window(this);
+            setupWindow();
         }catch (Exception e){
             closeDownConnection();
-            run();
+            runMain();
         }
+    }
+
+    private void setupWindow() throws Exception {
+        if(window == null) window = new Window(this);
     }
 
     void closeDownConnection() {
         try {
-            if (socket.isConnected()) socket.close();
-            if(inputStream != null)inputStream.close();
-            if(outputStream != null)outputStream.close();
-        }catch (IOException | NullPointerException e){}
+            if (socket != null){
+                if (socket.isConnected()) socket.close();
+                if (inputStream != null) inputStream.close();
+                if (outputStream != null) outputStream.close();
+                System.out.println("The Stream has closed");
+            }
+        }catch (IOException | NullPointerException e){
+            System.out.println("The Stream will not close");
+        }
     }
 
     private void setupSocketAndStreams() throws IOException {
-        socket = new Socket("192.168.1.12", 444);
+        socket = new Socket("192.168.1.12", 444); // Local host
+//        socket = new Socket("192.168.1.19", 444); // IP for the pi
         inputStream = new DataInputStream(socket.getInputStream());
         outputStream = new OutputStreamWriter(socket.getOutputStream());
     }
 
-    private void imageUpdateLoop() {
+    private void imageUpdateLoop(){
         while (true) {
             try {
+                if(checkConnectionsIsLost()) break;
                 bytes = converter.getBytesFromInputStream(inputStream);
                 image = converter.BytesToBufferedImage(bytes);
-            } catch (Exception e) {}
+            } catch (Exception ignored) {}
         }
+        closeDownConnection();
+        sleep(300);
+        runMain();
+
     }
 
     public  BufferedImage getImage() {
         return image;
     }
 
+    private boolean checkConnectionsIsLost(){
+        if(!socket.isConnected()) test("lost connection line 76");
+        return !socket.isConnected();
+    }
+
+    private void sleep(long millis){
+        try{
+            Thread.sleep(millis);
+        }catch (InterruptedException e){}
+    }
+
+    private void test(String text){
+        System.out.print(text);
+    }
 
 }
