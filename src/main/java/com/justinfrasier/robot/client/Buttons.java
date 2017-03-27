@@ -7,53 +7,61 @@ import javax.swing.*;
  */
 public class Buttons {
 
-    public JButton ForwardButton(){
+    public static JButton ForwardButton(){
         JButton button = new JButton();
         button.setText("Forward");
         //TODO Add Action listener
         return button;
     }
-    public JButton RightButton(){
+    public static JButton RightButton(){
         JButton button = new JButton();
         button.setText("Right");
         //TODO Add Action listener
         return button;
     }
-    public JButton LeftButton(){
+    public static JButton LeftButton(){
         JButton button = new JButton();
         button.setText("Left");
         //TODO Add Action listener
         return button;
     }
-    public JButton BackwardsButton(){
+    public static JButton BackwardsButton(){
         JButton button = new JButton();
         button.setText("Backwards");
         //TODO Add Action listener
         return button;
     }
 
-    public JButton CamUp(){
+    public static JButton CamUp(){
         JButton button = new JButton();
         button.setText("Cam Up");
-
+        //TODO Add Action listener
         return button;
     }
-    public JButton CamDown(){
+    public static JButton CamDown(){
         JButton button = new JButton();
-        button.setText("Cam Up");
-
+        button.setText("Cam Down");
+        //TODO Add Action listener
         return button;
     }
-    public JButton CamRight(){
+    public static JButton CamRight(){
         JButton button = new JButton();
-        button.setText("Cam Up");
-
+        button.setText("Cam Right");
+        //TODO Add Action listener
         return button;
     }
-    public JButton CamLeft(){
+    public static JButton CamLeft(){
         JButton button = new JButton();
-        button.setText("Cam Up");
-
+        button.setText("Cam Left");
+        //TODO Add Action listener
         return button;
     }
+
+    public static JButton Stop(){
+        JButton button = new JButton();
+        button.setText("Stop");
+        //TODO Add Action listener
+        return button;
+    }
+
 }
