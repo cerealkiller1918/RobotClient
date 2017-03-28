@@ -11,12 +11,14 @@ public class Buttons {
         JButton button = new JButton();
         button.setText("Forward");
         //TODO Add Action listener
+        button.addActionListener(e -> ButtonListener.test());
         return button;
     }
     public static JButton RightButton(){
         JButton button = new JButton();
         button.setText("Right");
         //TODO Add Action listener
+        button.addActionListener(ButtonListener.test2());
         return button;
     }
     public static JButton LeftButton(){
@@ -57,7 +59,7 @@ public class Buttons {
         return button;
     }
 
-    public static JButton Stop(){
+    public static JButton StopButton(){
         JButton button = new JButton();
         button.setText("Stop");
         //TODO Add Action listener

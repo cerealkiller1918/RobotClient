@@ -15,14 +15,6 @@ public class Window {
         panel = new VideoPanel(master);
         panel.repaint();
         frame.add(panel);
-        Runnable runnable = new Runnable() {
-            public void run() {
-                while(true){
-                    panel.repaint();
-                }
-            }
-        };
-        Thread thread = new Thread(runnable);
-        thread.start();
+        Repainter.run(panel);
     }
 }
