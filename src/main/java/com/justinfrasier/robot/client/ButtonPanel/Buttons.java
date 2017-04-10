@@ -1,4 +1,6 @@
-package com.justinfrasier.robot.client;
+package com.justinfrasier.robot.client.ButtonPanel;
+
+import com.justinfrasier.robot.client.Listeners.ButtonListener;
 
 import javax.swing.*;
 

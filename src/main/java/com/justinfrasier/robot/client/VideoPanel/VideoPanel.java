@@ -1,5 +1,7 @@
-package com.justinfrasier.robot.client;
+package com.justinfrasier.robot.client.VideoPanel;
 
+
+import com.justinfrasier.robot.client.Master.Master;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,7 +26,7 @@ public class VideoPanel extends JPanel {
         g.drawImage(image,0,0,null);
     }
 
-    public void updateImage(){
+    private void updateImage(){
         image = master.getImage();
     }
 }

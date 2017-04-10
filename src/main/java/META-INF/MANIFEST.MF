@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Class-Path: com.justinfrasier.robot.client.Master com.justinfrasier.ro
- bot.client.VideoPanel com.justinfrasier.robot.client.Window
-Main-Class: com.justinfrasier.robot.client.Main
+Class-Path: com.justinfrasier.robot.client.Master.Master com.justinfrasier.ro
+ bot.client.VideoPanel com.justinfrasier.robot.client.MainWindow.Window
+Main-Class: com.justinfrasier.robot.client.Main.Main
 

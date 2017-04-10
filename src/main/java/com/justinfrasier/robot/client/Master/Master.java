@@ -1,8 +1,14 @@
-package com.justinfrasier.robot.client;
+package com.justinfrasier.robot.client.Master;
+
+import com.justinfrasier.robot.client.Image.ImageConverter;
+import com.justinfrasier.robot.client.MainWindow.Window;
 
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.Socket;
+
+import static com.justinfrasier.robot.client.Sleep.Sleep.sleep;
+import static com.justinfrasier.robot.client.Logger.Logger.log;
 
 public class Master {
 
@@ -10,18 +16,18 @@ public class Master {
     private Socket socket;
     private DataInputStream inputStream;
     private OutputStreamWriter outputStream;
-    private byte[] bytes;
     private ImageConverter converter = new ImageConverter();
     private Window window;
 
     public void runMain(){
         try {
             image = null;
+            setupWindow();
             setupSocketAndStreams();
-            Runnable runnable = () -> imageUpdateLoop();
+            Runnable runnable = this::imageUpdateLoop;
             Thread thread = new Thread(runnable);
             thread.start();
-            setupWindow();
+            //setupWindow();
         }catch (Exception e){
             closeDownConnection();
             runMain();
@@ -32,7 +38,7 @@ public class Master {
         if(window == null) window = new Window(this);
     }
 
-    void closeDownConnection() {
+    private void closeDownConnection() {
         try {
             if (socket != null){
                 if (socket.isConnected()) socket.close();
@@ -46,8 +52,8 @@ public class Master {
     }
 
     private void setupSocketAndStreams() throws IOException {
-        socket = new Socket("192.168.1.12", 444); // Local host
-//        socket = new Socket("192.168.1.19", 444); // IP for the pi
+        socket = new Socket("localhost", 444); // Local host
+//        socket = new Socket("192.168.1.19", 444); // IP for the pie
         inputStream = new DataInputStream(socket.getInputStream());
         outputStream = new OutputStreamWriter(socket.getOutputStream());
     }
@@ -56,7 +62,7 @@ public class Master {
         while (true) {
             try {
                 if(checkConnectionsIsLost()) break;
-                bytes = converter.getBytesFromInputStream(inputStream);
+                byte[] bytes = converter.getBytesFromInputStream(inputStream);
                 image = converter.BytesToBufferedImage(bytes);
             } catch (Exception ignored) {}
         }
@@ -66,23 +72,16 @@ public class Master {
 
     }
 
-    public  BufferedImage getImage() {
+    public BufferedImage getImage() {
         return image;
     }
 
     private boolean checkConnectionsIsLost(){
-        if(!socket.isConnected()) test("lost connection line 76");
+        if(!socket.isConnected()) log("lost connection line 76");
         return !socket.isConnected();
     }
 
-    private void sleep(long millis){
-        try{
-            Thread.sleep(millis);
-        }catch (InterruptedException e){}
-    }
 
-    private void test(String text){
-        System.out.print(text);
-    }
+
 
 }

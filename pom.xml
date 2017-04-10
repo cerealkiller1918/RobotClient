@@ -19,7 +19,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.justinfrasier.robot.client.Main</mainClass>
+                            <mainClass>com.justinfrasier.robot.client.Main.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

@@ -1,4 +1,4 @@
-package com.justinfrasier.robot.client;
+package com.justinfrasier.robot.client.VideoPanel;
 
 import javax.swing.*;
 

@@ -1,6 +1,7 @@
-package com.justinfrasier.robot.client;
+package com.justinfrasier.robot.client.Main;
 
 
+import com.justinfrasier.robot.client.Master.Master;
 
 public class Main {
 
